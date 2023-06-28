@@ -1,0 +1,75 @@
+.java source code -> (compiler) -> byte code(0's and 1's) -> (JVM) -> Operating System
+JVM cant create objects itself -> so thats why we keep main method as static
+JVM -> first moves into Stack area -> then calls the Class Loader(it is program whose job is to load all static members into static pool area) -> next comes to main method(stack area deals the methods) -> next if any static variables or static methods in a class, then these stores in Static Pool Area(SPA) it is a single copy -> for non static fields objects are created in heap memory ( objects might have different so there is chance of multiple copies)
+
+Costructors :
+Constructors are used to initialise variables.(int i=30;)
+Some times programmers may create differnet objects but forget to initialize , so that by using constructors we can initialize a variable.
+Suppose developer may created hundred objects and every object is unique and it's associated variables are also unique, in that case Constructor with arugments can used.
+
+Abstract:
+A class cannot extend multiple classes.
+Abstract class have abstract and concrete methods. 
+Abstract class have default Public methods inorder to visible for another classes.
+
+Interface:
+Interface is used to achieve multiple inheritance.
+Interface has by default Public Static Final Variables. and Public Abstract methods.
+
+
+Upcasting is creating an object of child class and stored it into reference  of parent class, so the visibility of parent class only( the parent class methods only exec)
+
+Stateless Objects : the instance of a class doesn't have local fields or instance field other than static fields.
+
+Memory Leaks in Java :
+String str = "jidhfiiffifrefiyjdnkjndskjnhbfvhbv";
+String str2 = str.substring(1,5);
+well here str2 holds the entire String of str but it only points the index. where it uses whole memory of str as what it used. This is called memory leaks 
+
+Java Class Execution :
+After .class file created then the class file loaded into classLoader, after JVM rechecks whether it obeys OOPS and Java class principles, later JVM creates a memory like stack memory for static types  and object in heap memory, assign the default values to static and instance varibales, later those values modified by assigned values.
+When a java class is ready to execute first it loads all static blocks, then instance blocks, to keep track of how program is executed use "-verbose:class" in java run configurations. first load the super class static and then main class static blocks
+
+Equals and Hashcode contract :
+JVM internally calls these equals and hashcode methods. But  we should explicitly define these methods for better purpose. Like suppose if there is situation two objects created even though they are logically same,but their hashcodes are different so technically they are diferent. In that case override these two methods will avoid the confusion and make them logically equal. 
+if two objects equals they  have same hashcode but for unequal objects may have also same hashcode.
+
+When a mutable keys in Map, after trying to add another element then it redirects to null value.
+
+Arrays class :
+Arrays.toString(array[]) -> representation of array in string
+Arrays.sort(array[]) -> sort the array by quicksort
+Arrays.equals(array1[] , array2[]) -> whether two arrays are equal or not
+Arrays.copyOf(array[]) -> copying array
+Arrays.fill() -> fill entire array with a value 
+Arrays.parallerSort() -> sort the array only preferrable when array size greater than 8000 and it is 4 times much faster than normal sort
+
+Collections class :
+Collections.sort() -> sort the collection
+Collections.addAll(list,arr[]) -> to add the elements into list only strings
+Collections.binarySearch() -> to search for a particular element remember the list to be sorted before it making binarySearch
+Collections.max() -> to find max element in list
+Collections.min() -> to find min element in list
+Collections.swap() -> swap the element based on index
+Colections.frequency() -> to find element how many times it repeated
+Collcection.shuffle() -> to shuffle elements
+Collections.unmodifiableCollection() -> the list cannot be modified
+Collections.singleton() -> the list contain one element
+
+Functional Interface : Interface having only one abstract method and may have several static and default methods
+Predicate : Predicate is used to check the boolean condition only having one test() method
+Function : Function returns a value, it do some funcionality and return some value and only have apply() method
+Consumer :
+
+Reflection :
+Introspection of methods and classes
+uses cases : class browsers in IDE like showing the suggested methods for a particular object
+ Dynamic proxy details the time execution for a particular method
+ Processing annotations
+
+
+Treemap :
+Initially Treemap is used to sort the elements by natural order (comparabale)
+Treemap allows null keys before Java 6 after Java 8 it throws an exception like NullPointerException just because it permits the natural order (Comparable) so it is undetermined to compare the value with null value. 
+We can allow the null values by calling Treemap constructor with comparator paramater
+Ex: TreeMap<Integer,String> mm = new TreeMap<Integer, String>(Comparator.nullsFirst(Comparator.naturalOrder()));

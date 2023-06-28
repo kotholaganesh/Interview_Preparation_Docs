@@ -1,0 +1,124 @@
+Jackson dependency -> converting bean into json
+RestController(Controller + Response body) used for returning json/xml content -> Controller used for returning views/human readable format
+PathVariables and pathParam are bind the dynmaic values to url (Path Params requires value) 
+Data encapsulation is hiding data attributes and their behaviour in single unit, i.e is Object, Objects are independent to each other,Setter and Getter methods
+Child class can inherit properties from Parent class whereas Parent class could not inherit properties from Child class. causing error typemismatch.
+Inorder to return the httpStatusCodes we can use " throw new ResponseStatusException(HttpStatus.NotFound) for 404 and so on.
+Get, Post, Put, Patch, Delete -> Get to retrieve , Post to create new record , Put -> to update existing record , Patch -> to update part of resource
+Only methods have been overriden not variables
+For logs -> logging.level.org.springframework=debug / info / warn / error
+For h2 database connect -> spring.datasource.url=jdbc:h2:mem:testdb
+Spring.jpa.show-sql=true
+CommandLineRunner is a Functional Interface used in SpringBootApplication, it has a run() method and run the bean
+LoggerFactory from slf4j can be used for loggings 
+JsonAssert.assertEquals used to compare two json objects in @Test / Junit test
+Comparable and Comparator are used to sort the custom objects. we cannot simply sort the objects based on primitive datatypes likes int,float using Arrays.sort()
+Comparator<E e> is a functional interface used to comapare the objects, have one implemented method compare() and to sort the objects use comparTo();
+ResponseBody -> converts object into json/xml
+RequestBody -> converts json/xml into object
+RequestMapping -> we can mention it in class or method level, if it is class level it means we are getting objects list.If it is in method level simply we adding http methods like get post put etc..,
+@RefreshScope annotation is used to load the configuration properties value from config server
+
+Strings :
+Strings are immutable in java bcoz so that the value cannot be changed like username password
+String class cannot be extended bcoz it is final and that is why it is immutable
+Strings maintaining StringPool, StringPool is where string objects can be stored, and can cleared by garbage collector.
+JVM checks the stringpool if the object is already there then JVM refers to reference and pointed to same object.
+Converting String to Int we can use "Integer.parseInt(String)" or "Integer.valueOf(String)
+Converting int to String we can use "String.valueOf(int)"
+StringJoiner is class where we can concate strings using delimiters like str.add("separator","prefix","suffix") method
+String , StringBuffer, StringBuilder classes whereas StringBuffer and StringBuilder are mutable classes
+StringBuffer is thread safe , so it take more time and performance instead we can use StringBuilder
+
+Junit:
+Junit is a unit testing, even it takes more time to write but execution or output would be more precise.
+Junit 5 is current version having assertEquals(expected, actual) method.
+Junit has assertTrue(), assertNull(), assertArrayEquals() ... etc., methods 
+Testcases should define in separate TestCases package.
+@Test , @BeforeAll , @BeforeEach , @AfterAll , @AfterEach annotations in junit
+
+Exceptions :
+Inorder to handle abnormal conditions/exceptions occured during program execution there were default exception handlers in java. Which shown exception name , message along with its full stack trace. After the printing exception information the jvm terminates the program execution.
+In order to stop the program or terminates the program , the developers use Exception Handling.
+We can use try catch blocks used to handle exceptions.
+Catch block should be after try block and there were no other statements between try and catch.
+Finally block is executed even if the exception is not caught.
+Finally block is used to close some files or db connections. Finally must be executed even catch block is not executed. There is situation that finally block is not executed is when we use statement system.exit(0).
+
+Static :
+Static is a class level not object level. In override it is in objects hand to which method has to be called.
+When program is executing first JVM checks its super class and if there any static blocks then those blocks will be executed.
+Static means a single copy and it directly stored in Stack Area Pool. And these are available to all objects.
+
+Threads :
+In multithreading cpu switches to one process to another process so fastly thats why we can see hanlding multipile processes.
+MultiTasking is performing multiple tasks which requires huge memory like open Java IDE and text editor.
+MultiThreading is to execute multiple threads by using shared resources. It requires less memory and sometime shares same memory that is why it is light weight.
+Threads can be achieved through extends Thread class or implements Runnable interface. Thread class implements Runnable interface and override run() method. Better to use Runnable Interface rather than extends Thread class bcoz by using Interface we may achieve multiple inheritance.
+Synchronized used to execute particular method or block by lock the resource until statements are fully executed. Synchronized used at block and method level. When in case of block level only particular statements got executed. while in method level whole method statements got executed.
+New -> runnable -> running -> wait/blocked -> dead ---> These states managed by Thread Scheduler
+New state when we create Thread but not yet calls the run method or starts execution.
+Runnable state calls the start method  which is used to call run() method, here also execution is not started , its just ready to excute.
+Running State where exactly the thread is running. From this state it can either move to Runable or Blocked state.
+Blocked state where the thread has to block for sometime. After it again went to Runnable not Running.
+Deamon Threads are used to perfrom garbage collector.This have low priority. We can make any thread as Daemon thread by invoking isDeamon() for thread.
+We can never rely on execution of threads based on Thread Scheduler. The execution may be different for some other time.
+After the thread has been executed it moves to dead state. You can never call the same thread again. Eventually we never run a thread a twice.
+
+
+
+Singleton class can be created by making constructor as private.
+Steps to follow to create Singleton class:
+create a static field with Instance reference ex : private static ClassName cn = new ClassName();
+make the construcor private ex: private ClassName(){}
+now create an instace method which is static and private and it returns a class instance : private static ClassName getInstance() {return cn};
+no call the instances in main method ex : ClassName cc1 = ClassName.getInstance()
+Since getInstance is a static method we dont create or call like ClassName cc1 = new ClassName()
+
+SOLID Principles :
+S -> Single Responsibility means having single class that produce single functionality. It means the class may have single method so that it is easy for testing and not meshup.
+O -> Open for extension and Closed for modification means a class can be extends or inherits for extension. And closed for modification means stop the modification to prevents causing new bugs.
+L -> Liskov substitution means sometimes we simply cannot extends the class as it may cause odd behaviour or where Open Closed Principle may false. In that place we should do rightful modifications.
+Ex: class Rectangle , class Square which is extending Rectangle. In this case if we get the same values from Rectangle. Then the expected results might be wrong. In order to tackle this problem, extending the class that supports the same behaviour.
+I -> Interface segregation means simply a client that doesn't need to depend on any not useful methods. So that it makes code readable maintainable. We can simply use the methods that are required and leave the methods which may not be useful.
+Ex : Interface Vehicle { method openDoor() } -> class Car extends Vehicle { method openDoor() } -> class Bike extends Vehicle { method openDoor() }
+here, the bike doesn't need openDoor() method. So we may ignore it.
+D -> Dependency Inversion means removes the hard coded depenedencies to enhance loosely coupled.
+
+Try With Resources : Try with resources simply like try catch blocks whereas in try with resources we provide inside try(FileOutputStream fos = new FileOutputStream("abc.txt")) just to close the resources after the try catch block executed to prevent the resource open and avoid changes.
+
+Hibernate :
+Transient state where object is not associated with Sessions.
+Persist state where objects are associted with sessions.
+Detached state where object is detached from session. when session is closed the objects are no longer consideration even they were in DB.
+session.save() also saves the object but it creates an identifier.
+session.merge() used to save the object in transient and detached states.
+
+Design Patterns :
+Creational design patterns follows at time of creation of objects.
+Structural design patterns are concerned with how classes and objects can be composed to form larger structures, it focuses on simplifying structure by identifying relationship.
+Behavioural design pattern focuses on how objects are communicating by loosely coupling and interaction and responsibility of objects
+
+Spring Framework :
+Spring is a light weight framework to develop java applications. Light weight means it has libraries, modules, which have almost less than 10 MB. And dont need large servers.s
+Spring is non invasive, we dont need to write so much of boiler plate code like in JDBC, dont need to extend or import so many classes
+Dependency Injection and IOC(Inversion of control) are two major things where IOC is responsible to create and handle life cycle of objects.
+AOP is also important it is used to creating concerns to keep track of application logs,without modifying business logic
+
+Whitelabel Error Page :
+Custom Error Controller :when we will implementing ErrorController Interface there is a method called getErrorPath() by overriding so that can return custom error path
+By displaying custom error page : where we can create error.html file and place it in src/main/rsc/templates then spring boot automatically picks.
+By disabling whitelabel error page:It is easiest way by disabling server.error.whitelabel.enabled property to false in application.properties files.
+
+FailFast and FailSafe Iterators:
+Since they are iterators, we can able to see its functionality only when we are iterating through collection.
+When we are trying to add element by using add() method in ArrayList, HashMap etc ... the exception raised as ConcurrentModificationException and stopped the execution
+This is called Fail fast Iterator.
+Even when we try to add element in iterator loop , if there is exception raised and this is called Fail Safe Iterator. Ex:ConcurrentHashMap
+
+Java Class Execution :
+After .class file created then the class file loaded into classLoader, after JVM rechecks whether it obeys OOPS and Java class principles, later JVM creates a memory like stack memory for static types  and object in heap memory, assign the default values to static and instance varibales, later those values modified by assigned values.
+When a java class is ready to execute first it loads all static blocks, then instance blocks, to keep track of how program is executed use "-verbose:class" in java run configurations. first load the super class static and then main class static blocks
+
+
+fetch("https://jsonplaceholder.typicode.com/users")

@@ -1,0 +1,32 @@
+Microservices :
+Microservices communicate in three different types :
+Synchronuos communication -> the client sends a request and waits for a response from the service. ex: resttemplate , webclient, spring cloud open feign library
+
+Asynchronous communication -> the client sends a request and not wait for any response from service. In between there is message broker .ex; kafka and rabbitmq
+
+RestTemplate is in maintainence mode and it will deprcated so the developers suggest to use WebClient it has syn and async communication and streams conversions
+
+Inorder to use WebClient use spring-boot-starter-webflux dependency in pom
+
+Inorder to use Spring cloud openFeign we use spring-boot-starter-openfeign dependency in pom, later we annotate with @EnableFeignClient in spring application main class and create an Interface and annotate with @FeignClient so that it makes dynamic implementation for that interface methods.
+
+Service Registry and Discovery :
+Service Registry by using Spring Cloud Netflix Eureka Server dependency it gives us a User Interface by redirect to url like http:localhost:XXXX/eureka and it shows what are the services and instances running on a Microservice
+When a typical microservice architecture lots of services running , for every service there are some instances too, when one services calls the another service instance then the current service should know its hostname and port numbers, and due to lot of services and instances it is hard to call, sometimes the services may up and down, to tackle this situation we use service registry and service discovery EX: Spring Cloud netflix Eureka Server
+whatever the services running ex: department-service, employee-service, api-gateway are eureka clients annotation used as @EnableEurekaClient
+and service registry is eureka server annotation used as @EnableEurekaServer
+
+Spring cloud load balancer a technique used to balance the load of microservices instance, if one of the instance is goes down then by using this load balancer we can redirect the request to another instance
+
+API Gateway :
+API gateway stands between the client and services and it internally uses the Service Registry and Discovery.
+Initially when client send a request to particular microservices, then the request has been redirect to correct service by using host name and port number. So it so difficult to call the correct service by using port and host name because there are lots of services running.
+So thats why API Gateway into picture. It groups all the services and instances and provide a unique url and unique service id , so that client can get response by using this unique url.
+->Use Spring cloud gateway dependency and it uses its own web server (Netty Web Server)
+->make it as eureka client and let discovered by eureka server by making @EnableEurekaClient
+->add the url of each services in application.properties file
+
+Circuit Breaker : 
+If one service is down, then we can run another Instance
+If service is down we can redirect to another method using @CircuitBreaker annotation
+if service is down use open close halfopen techniques
