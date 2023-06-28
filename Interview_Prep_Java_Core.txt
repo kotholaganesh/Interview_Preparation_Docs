@@ -1,6 +1,9 @@
+###### JAVA COMPILER WORKING #####
+
 .java source code -> (compiler) -> byte code(0's and 1's) -> (JVM) -> Operating System
 JVM cant create objects itself -> so thats why we keep main method as static
 JVM -> first moves into Stack area -> then calls the Class Loader(it is program whose job is to load all static members into static pool area) -> next comes to main method(stack area deals the methods) -> next if any static variables or static methods in a class, then these stores in Static Pool Area(SPA) it is a single copy -> for non static fields objects are created in heap memory ( objects might have different so there is chance of multiple copies)
+
 
 Costructors :
 Constructors are used to initialise variables.(int i=30;)
